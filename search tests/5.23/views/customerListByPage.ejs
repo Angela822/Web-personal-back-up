@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>測試網頁</title>
+<!--*********-->
+<!-- 加入css -->
+<!--*********-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/myDropdownMenu.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <div class="header">
+        <img src="images/logo.png" class="logo">
+       
+        <div class="navbar">
+            <ul class="right">
+                <li><a href="/">回首頁</a></li>
+            </ul>          
+        </div>        
+    </div>
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->  
+    
+    
+    
+    <!--==========================================-->
+    <div class="container">
+        
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="content">
+            <h2 class="title">客戶資料清單</h2>   
+
+            <!------------------------------>
+            <!-- 頁碼開始                 -->
+            <!------------------------------>       
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="pagination">
+                        <li>
+                            <a>第<%=pageNo%>頁</a>
+                        </li>                   
+
+                        <% if(startPage>1){ %>
+                            <li>
+                                <a href="/customerListByPage?pageNo=<%=(startPage-1)%>">上一區段...</a>
+                            </li>
+                        <% } %> 
+
+                        <% for(var i=startPage; i<startPage+linePerPage; i++) {%>
+                            <% if(i<=totalPage){ %>
+                                <li>
+                                    <a href="/customerListByPage?pageNo=<%=i%>"><%=i%></a>
+                                </li>
+                            <% } %> 
+                        <% } %>
+
+                        <% if(startPage+linePerPage<totalPage){ %>
+                            <li>
+                                <a href="/customerListByPage?pageNo=<%=(startPage+linePerPage)%>">...下一區段</a>
+                            </li>
+                        <% } %>                         
+                    </ul>
+				
+                    <!----------------------->
+                    <!-- 查詢              -->
+                    <!----------------------->
+                    <form class="navbar-form nav navbar-right" role="search" method="get" action="/customerSearchByName">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="客戶名稱 / 部份名稱" id="bookName" name="bookName"/>
+                        </div> 
+                        <button type="submit" class="btn btn-default">
+                            查詢
+                        </button>
+                    </form>
+                </div>  
+            </div>  
+            <!------------------------------>
+            <!-- 頁碼結束                 -->
+            <!------------------------------>
+                    
+            <p>
+                    <div id="products_contents">
+							<ul id="serch">
+							<!-- ▼▼分類1從此開始▼▼ -->
+							<li id="All">
+								<p class="title">全部 ALL</p>
+								<ul method="get" action="/discuss2">
+									<!-- ▼▼項目1從此開始▼▼ -->
+									<% for(var i=0; i<data.length; i++) {%>
+										<li class="clearfix">
+											<p class="photo"><img src="images/products_01.jpg" width="120" height="120"></p>
+											<p class="type"><a href="#Simplified Chinese">簡體書</a></p>
+											<h3><a href="/discuss3?bookName=<%= data[i].bookName %>"><%= data[i].bookName %></a></h3>
+											<p class="text">百分之百台灣原汁原味獨創角色!<br />
+											Line貼圖排行榜上居高不下長青角色!</p>   
+											<a href="#" class="icon">
+											10 <span class="glyphicon glyphicon-thumbs-up"></span>
+											3 <span class="glyphicon glyphicon-comment"></span>
+											</a>                       	
+											<p class="date">2017.08.11</p>
+											<a href="/discuss2?bookName=<%= data[i].bookName %>" class="button">More</a>
+										</li>
+									<% } %> 
+									<!-- ▲▲項目1到此為止▲▲ -->
+								</ul>
+								<p class="pagetop"><a href="/discuss">TOP ↑</a></p>
+                            </li>
+                            </ul>
+                    </div>
+            </p>	    
+        </div>    
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->      
+        
+        
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div class="footer">
+            NTUB imd, 2017.    
+        </div>        
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--> 
+	
+    </div>
+    <!--==========================================-->  
+    <!--*********-->
+    <!-- 載入js  -->
+    <!--*********-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>        
+    <script src="js/scripts.js"></script>   
+    <script src="js/myDropdownMenu.js"></script>        
+</body>
+</html>
